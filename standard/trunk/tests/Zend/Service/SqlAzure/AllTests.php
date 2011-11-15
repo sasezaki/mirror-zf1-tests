@@ -23,25 +23,23 @@
 /**
  * Test helpers
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_Credentials_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_SqlAzure_AllTests::main');
 }
 
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKeyTest.php';
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKeyLiteTest.php';
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignatureTest.php';
+require_once 'Zend/Service/SqlAzure/Management/AllTests.php';
 
 /**
  * @category   Zend
- * @package    Zend_Service_WindowsAzure
+ * @package    Zend_Service_SqlAzure
  * @subpackage UnitTests
  * @version    $Id$
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Credentials_AllTests
+class Zend_Service_SqlAzure_AllTests
 {
     public static function main()
     {
@@ -52,14 +50,14 @@ class Zend_Service_WindowsAzure_Credentials_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
 
-        $suite->addTestSuite('Zend_Service_WindowsAzure_Credentials_SharedKeyTest');
-        $suite->addTestSuite('Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest');
-        $suite->addTestSuite('Zend_Service_WindowsAzure_Credentials_SharedAccessSignatureTest');
-        
+        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_SQLMANAGEMENT_RUNTESTS) {
+        	$suite->addTest(Zend_Service_SqlAzure_Management_AllTests::suite());
+        }
+
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Service_WindowsAzure_Credentials_AllTests::main') {
-    Zend_Service_WindowsAzure_Credentials_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Service_SqlAzure_AllTests::main') {
+    Zend_Service_SqlAzure_AllTests::main();
 }
